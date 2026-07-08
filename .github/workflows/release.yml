@@ -1,0 +1,54 @@
+name: Build and Release DMG
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ink/requirements.txt py2app
+
+      - name: Build .app with py2app
+        working-directory: ink
+        run: python setup.py py2app
+
+      - name: Copy core modules into app bundle
+        run: |
+          RESOURCES="ink/dist/Ink.app/Contents/Resources"
+          mkdir -p "$RESOURCES/core"
+          cp core/*.py "$RESOURCES/core/"
+          mkdir -p "$RESOURCES/gui"
+          cp ink/gui/*.py "$RESOURCES/gui/"
+
+      - name: Strip quarantine attributes
+        run: xattr -cr ink/dist/Ink.app
+
+      - name: Create DMG
+        run: |
+          hdiutil create -volname "Ink" \
+            -srcfolder ink/dist/Ink.app \
+            -ov -format UDZO \
+            ink/dist/Ink.dmg
+
+      - name: Get version from tag
+        id: version
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload DMG to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ink/dist/Ink.dmg
+          name: ${{ steps.version.outputs.tag }}
+          generate_release_notes: true
