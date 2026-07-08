@@ -20,17 +20,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ink/requirements.txt py2app
 
+      - name: Prepare source for py2app
+        run: |
+          cp -r core/ ink/core/
+
       - name: Build .app with py2app
         working-directory: ink
         run: python setup.py py2app
-
-      - name: Copy core modules into app bundle
-        run: |
-          RESOURCES="ink/dist/Ink.app/Contents/Resources"
-          mkdir -p "$RESOURCES/core"
-          cp core/*.py "$RESOURCES/core/"
-          mkdir -p "$RESOURCES/gui"
-          cp ink/gui/*.py "$RESOURCES/gui/"
 
       - name: Strip quarantine attributes
         run: xattr -cr ink/dist/Ink.app
