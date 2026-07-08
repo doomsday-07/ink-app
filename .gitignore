@@ -1,0 +1,23 @@
+# Build artifacts
+venv/
+ink/build/
+ink/dist/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.DS_Store
+
+# Model weights (large binaries)
+custom_model/
+
+# Main app (not part of ink standalone)
+/main.py
+/gui/
+/DATASET_GUIDE.md
+
+# Training module
+/train/
+/train.py
+/train_kaggle.py
+/test_model.py

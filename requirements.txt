@@ -1,0 +1,15 @@
+PyQt6>=6.6.0
+PyMuPDF>=1.24.0
+pyHanko>=0.25.0
+pyHanko[image-support]>=0.25.0
+Pillow>=10.0.0
+numpy>=1.24.0
+pyobjc-framework-Vision>=10.0
+pyobjc-framework-ApplicationServices>=10.0
+
+# Optional: EasyOCR for multilingual handwriting recognition (80+ languages)
+# Uncomment the line below if you need multilingual support
+# easyocr>=1.7.0
+
+# Optional: Training dependencies for custom model
+# pip install torch jiwer
