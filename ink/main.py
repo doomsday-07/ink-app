@@ -5,6 +5,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtCore import QTimer
+from PyQt6.QtGui import QIcon
 
 from core.accessibility import request_accessibility_permission, open_accessibility_settings, FocusedAppTracker
 from core.recognizer import HandwritingRecognizer
@@ -27,6 +28,10 @@ def main():
     app = QApplication(sys.argv)
     app.setApplicationName("Ink")
     app.setOrganizationName("InkApp")
+
+    icon_path = os.path.join(os.path.dirname(__file__), "ink.png")
+    if os.path.exists(icon_path):
+        app.setWindowIcon(QIcon(icon_path))
 
     if HAS_COCOA:
         NSApp.setActivationPolicy_(0)  # Regular (shows in dock temporarily)

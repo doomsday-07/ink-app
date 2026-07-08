@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="ink/assets/ink.svg" width="120" alt="Ink Logo">
+</p>
+
 # Ink
 
 A macOS system-wide handwriting input tool — draw with a stylus or mouse, and recognized text is injected into any application.

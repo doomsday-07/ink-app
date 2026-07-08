@@ -12,6 +12,7 @@ OPTIONS = {
         "CFBundleIdentifier": "com.inkapp.ink",
         "CFBundleVersion": "1.0.0",
         "CFBundleShortVersionString": "1.0.0",
+        "CFBundleIconFile": "ink.icns",
         "LSMinimumSystemVersion": "12.0",
         "LSUIElement": True,
     },

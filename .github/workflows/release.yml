@@ -31,6 +31,9 @@ jobs:
         working-directory: ink
         run: python setup.py py2app
 
+      - name: Copy icon into app bundle
+        run: cp ink/ink.png ink/dist/Ink.app/Contents/Resources/
+
       - name: Strip quarantine attributes
         run: xattr -cr ink/dist/Ink.app
 

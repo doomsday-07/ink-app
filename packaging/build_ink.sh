@@ -27,6 +27,8 @@ cp "$ROOT_DIR/core/"*.py "$RESOURCES/core/"
 mkdir -p "$RESOURCES/gui"
 cp "$INK_DIR/gui/"*.py "$RESOURCES/gui/"
 
+cp "$INK_DIR/ink.png" "$RESOURCES/"
+
 echo "Local modules copied."
 
 # Remove quarantine attributes (needed for unsigned apps)
